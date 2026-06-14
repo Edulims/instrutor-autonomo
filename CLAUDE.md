@@ -93,9 +93,26 @@ Ordem pragmática para transformar o mock em produto:
 
 ## 🌿 Fluxo de trabalho (git)
 
-- `main` é a base estável. **Não commite direto na `main`** — crie uma branch por feature
-  (`feat/...`, `fix/...`).
-- Rode `npm run build` antes de abrir PR.
-- Commits pequenos e descritivos.
+Modelo de branches (já criado no remoto):
+
+- **`main`** — estável / release. **Ninguém commita nem dá merge direto aqui.**
+- **`develop`** — linha de integração. É daqui que saem as features e é para cá que voltam (via PR).
+- **`feat/<nome-ou-tarefa>`** — branch de trabalho. **Cada pessoa na sua própria branch** (ex.: já existe
+  `feat/eduardo`; o colega cria `feat/<nome-dele>`). Nunca dois devs na mesma branch.
+
+Ciclo de uma tarefa:
+
+```bash
+git checkout develop && git pull        # partir do develop atualizado
+git checkout -b feat/minha-tarefa       # sua branch
+# ... código ...
+npm run build                           # type-check tem que passar
+git commit -m "feat: ..."               # Conventional Commits (feat/fix/chore/docs/refactor)
+git push -u origin feat/minha-tarefa
+# abrir Pull Request: feat/minha-tarefa -> develop
+```
+
+- Commits pequenos, descritivos, no padrão **Conventional Commits**.
+- Sincronize com frequência (`git pull origin develop`) para evitar conflitos grandes.
 - `_handoff/` e `handoff.tar.gz` (referência de design original) **não** estão no git — peça ao time se
   precisar deles.
