@@ -1,0 +1,224 @@
+/* ============================================================
+   Instrutores Autônomos de Trânsito — Design Tokens & Base
+   ============================================================ */
+
+:root {
+  /* Accents (shared light/dark) */
+  --brand: #2563EB;
+  --brand-600: #2563EB;
+  --brand-700: #1D4ED8;
+  --brand-soft: rgba(37, 99, 235, 0.12);
+  --amber: #F59E0B;
+  --amber-soft: rgba(245, 158, 11, 0.14);
+  --emerald: #10B981;
+  --emerald-soft: rgba(16, 185, 129, 0.14);
+  --rose: #F43F5E;
+  --rose-soft: rgba(244, 63, 94, 0.14);
+
+  /* Radii */
+  --r-card: 12px;
+  --r-ctl: 8px;
+  --r-pill: 999px;
+
+  /* Type */
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 160ms var(--ease);
+}
+
+/* ---------- DARK (default) ---------- */
+[data-theme="dark"] {
+  --bg: #0B0F19;
+  --bg-2: #0E1422;
+  --surface: #161F30;
+  --surface-2: #1B2638;
+  --surface-hover: #1E2A3E;
+  --border: #243249;
+  --border-soft: #1C2942;
+  --text: #F8FAFC;
+  --text-muted: #94A3B8;
+  --text-dim: #64748B;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.35), 0 1px 3px rgba(0,0,0,0.4);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,0.55), 0 6px 18px rgba(0,0,0,0.4);
+  --brand-700: color-mix(in srgb, var(--brand) 74%, #000);
+  --brand-soft: color-mix(in srgb, var(--brand) 17%, transparent);
+  --brand-on-soft: color-mix(in srgb, var(--brand) 56%, #fff);
+  --amber-on-soft: #FBBF5A;
+  --emerald-on-soft: #4FD6A8;
+  --track: #1F2A3D;
+}
+
+/* ---------- LIGHT ---------- */
+[data-theme="light"] {
+  --bg: #F8FAFC;
+  --bg-2: #F1F5F9;
+  --surface: #FFFFFF;
+  --surface-2: #F8FAFC;
+  --surface-hover: #F1F5F9;
+  --border: #E2E8F0;
+  --border-soft: #EEF2F7;
+  --text: #0F172A;
+  --text-muted: #64748B;
+  --text-dim: #94A3B8;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,0.06);
+  --shadow-md: 0 4px 14px rgba(15,23,42,0.08), 0 1px 3px rgba(15,23,42,0.05);
+  --shadow-lg: 0 24px 60px rgba(15,23,42,0.16), 0 6px 18px rgba(15,23,42,0.08);
+  --brand-700: color-mix(in srgb, var(--brand) 80%, #000);
+  --brand-soft: color-mix(in srgb, var(--brand) 12%, transparent);
+  --brand-on-soft: color-mix(in srgb, var(--brand) 88%, #000);
+  --amber-on-soft: #B45309;
+  --emerald-on-soft: #047857;
+  --track: #E2E8F0;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: #05070D;
+  overflow: hidden;
+}
+
+#root { height: 100vh; }
+
+/* App root inside a frame screen */
+.app {
+  height: 100%;
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+h1, h2, h3, h4, h5 { font-family: var(--font-head); margin: 0; letter-spacing: -0.02em; }
+.num { font-family: var(--font-head); font-feature-settings: "tnum" 1; letter-spacing: -0.01em; }
+
+button { font-family: inherit; cursor: pointer; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 999px; border: 3px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-dim); background-clip: padding-box; }
+
+/* ============================================================
+   STAGE / CONTROL BAR (outside the device frames)
+   ============================================================ */
+.stage {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(1100px 700px at 78% -10%, rgba(37,99,235,0.18), transparent 60%),
+    radial-gradient(900px 600px at 5% 110%, rgba(245,158,11,0.10), transparent 55%),
+    #05070D;
+}
+
+.topbar {
+  flex-shrink: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 22px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  background: rgba(8,11,18,0.6);
+  backdrop-filter: blur(12px);
+  color: #E6EDF7;
+  z-index: 40;
+}
+.topbar__brand { display: flex; align-items: center; gap: 11px; }
+.topbar__logo {
+  width: 34px; height: 34px; border-radius: 9px;
+  display: grid; place-items: center; flex-shrink: 0;
+  background: linear-gradient(150deg, var(--brand), var(--brand-700));
+  box-shadow: 0 4px 14px rgba(37,99,235,0.45), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.topbar__name { font-family: var(--font-head); font-weight: 700; font-size: 15px; letter-spacing: -0.01em; line-height: 1; }
+.topbar__name small { display: block; font-family: var(--font-body); font-weight: 500; font-size: 11px; color: #7C8AA3; letter-spacing: 0.02em; margin-top: 3px; }
+
+.topbar__spacer { flex: 1; }
+
+.seg {
+  display: inline-flex;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+.seg button {
+  border: none; background: transparent; color: #9AA7BD;
+  font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em;
+  padding: 7px 12px; border-radius: 7px;
+  display: inline-flex; align-items: center; gap: 7px;
+  transition: var(--t-fast);
+}
+.seg button:hover { color: #E6EDF7; }
+.seg button.on { background: rgba(255,255,255,0.95); color: #0B0F19; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.seg.brandseg button.on { background: var(--brand); color: #fff; }
+
+.topbar__hint { font-size: 12px; color: #64748B; display: flex; align-items: center; gap: 7px; }
+.kbd { font-family: var(--font-head); font-size: 11px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 5px; padding: 2px 6px; color: #B9C4D6; }
+
+.stage__viewport {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.scaler { transition: none; }
+
+/* ============================================================
+   MACBOOK FRAME
+   ============================================================ */
+.mac { display: flex; flex-direction: column; align-items: center; filter: drop-shadow(0 50px 70px rgba(0,0,0,0.6)); }
+.mac__screen {
+  width: 1380px;
+  background: #0A0A0C;
+  border-radius: 22px;
+  padding: 13px;
+  border: 1px solid #2A2D33;
+  box-shadow: inset 0 0 0 2px #050506, 0 0 0 1px rgba(255,255,255,0.04);
+  position: relative;
+}
+.mac__notch {
+  position: absolute; top: 13px; left: 50%; transform: translateX(-50%);
+  width: 150px; height: 22px; background: #0A0A0C; border-radius: 0 0 11px 11px; z-index: 6;
+}
+.mac__cam { position: absolute; top: 13px; left: 50%; transform: translateX(-50%); width: 7px; height: 7px; border-radius: 50%; background: #15171C; box-shadow: inset 0 0 2px #2b6cff33; z-index: 7; margin-top: 6px; }
+.mac__glass {
+  width: 1354px; height: 846px; border-radius: 11px; overflow: hidden;
+  position: relative; background: #000;
+}
+.mac__base {
+  width: 1520px; height: 26px; position: relative;
+  background: linear-gradient(180deg, #b9bec7 0%, #8e949e 42%, #6d727b 60%, #3d4047 100%);
+  border-radius: 0 0 16px 16px;
+  box-shadow: inset 0 2px 2px rgba(255,255,255,0.5);
+}
+.mac__notchbar { /* mac dim hinge */
+  width: 1520px; height: 8px;
+  background: linear-gradient(180deg, #2c2f35, #1a1c20);
+}
+.mac__indent {
+  position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 180px; height: 13px; background: #2a2d33; border-radius: 0 0 12px 12px;
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.5);
+}
+
+/* iPhone outer glow wrapper */
+.phone-wrap { filter: drop-shadow(0 50px 70px rgba(0,0,0,0.6)); }

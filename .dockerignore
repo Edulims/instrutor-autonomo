@@ -1,0 +1,11 @@
+node_modules
+dist
+.git
+.gitignore
+*.log
+_handoff
+handoff.tar.gz
+Dockerfile
+docker-compose.yml
+.dockerignore
+README.md
